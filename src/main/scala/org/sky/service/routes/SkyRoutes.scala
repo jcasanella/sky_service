@@ -3,12 +3,13 @@ package org.sky.service.routes
 import akka.event.LoggingAdapter
 import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
 import akka.http.scaladsl.server.Directives.{as, complete, concat, entity, get, onComplete, onSuccess, path, pathPrefix, post}
-import org.sky.service.model.{Message, Order}
+import org.sky.service.model.{Message, Order, Order2}
 
-import scala.concurrent.ExecutionContextExecutor
+import scala.concurrent.{ExecutionContextExecutor, Future}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
-import org.sky.service.db.Db
+import akka.http.scaladsl.server.Route
+import org.sky.service.db.{ActionRepository, Db}
 import org.sky.service.model.JsonFormats._
 
 class SkyRoutes(val log: LoggingAdapter)(implicit ec: ExecutionContextExecutor) {
@@ -18,7 +19,7 @@ class SkyRoutes(val log: LoggingAdapter)(implicit ec: ExecutionContextExecutor) 
   val routes =
     concat(
       get {
-        path("item" / LongNumber ) { id =>
+        pathPrefix("item" / LongNumber ) { id =>
           val maybeItem = db.fetchItem(id)
           onSuccess(maybeItem) {
             case Some(item) => {
@@ -34,7 +35,7 @@ class SkyRoutes(val log: LoggingAdapter)(implicit ec: ExecutionContextExecutor) 
       },
       get {
         path("test") {
-          complete(Message("ok"))
+          complete(Message(SkyResponses.OK))
         }
       },
       post {
@@ -43,7 +44,7 @@ class SkyRoutes(val log: LoggingAdapter)(implicit ec: ExecutionContextExecutor) 
             val saved = db.saveOrder(order)
             onComplete(saved) { done =>
               log.info(s"Order created.")
-              complete(Message("order created"))
+              complete(Message(SkyResponses.ORDER_CREATED))
             }
           }
         }
