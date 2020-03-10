@@ -15,7 +15,7 @@ class SkyRoutes2(actionRepository: ActorRef[ActionRepository.Command])(implicit 
   extends SkyResponsesJson {
 
   implicit val timeout: Timeout = 3.seconds
-  implicit val scheduler = system.scheduler
+//  implicit val scheduler = system.scheduler
 
   import akka.actor.typed.scaladsl.AskPattern._
 

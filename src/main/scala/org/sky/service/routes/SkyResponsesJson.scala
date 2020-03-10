@@ -13,8 +13,10 @@ trait SkyResponsesJson extends SprayJsonSupport {
   implicit object StatusFormat extends RootJsonFormat[Status] {
 
     def write(status: Status): JsValue = {
-      case Failed => JsString("Failed")
-      case Successful => JsString("Successful")
+      status match {
+        case Failed => JsString("Failed")
+        case Successful => JsString("Successful")
+      }
     }
 
     def read(json: JsValue): Status = {
@@ -24,8 +26,8 @@ trait SkyResponsesJson extends SprayJsonSupport {
         case _ => throw new DeserializationException("Status unexpected")
       }
     }
-
-    implicit val itemFormat = jsonFormat2(Item)
-    implicit val orderFormat = jsonFormat2(Order2)
   }
+
+  implicit val itemFormat = jsonFormat2(Item)
+  implicit val orderFormat = jsonFormat2(Order2)
 }
