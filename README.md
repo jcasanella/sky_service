@@ -22,4 +22,25 @@ $message = @{
 
 $JSON = $message | convertto-json 
 
+{
+    "id":  10,
+    "items":  [
+                  {
+                      "id":  100,
+                      "name":  "Test01"
+                  }
+              ]
+}
+
 Invoke-WebRequest -uri "http://localhost:8080/item/10" 
+
+
+Nexus:
+
+docker pull sonatype/nexus3
+docker volume create --name nexus-data
+docker container run -d -p 8081:8081 --name nexus -v //d/tmp/docker/nexus:/nexus-data sonatype/nexus3:latest
+
+Password located into this persisted folder. File called: admin.password
+user: admin
+https://hub.docker.com/r/sonatype/nexus3/
