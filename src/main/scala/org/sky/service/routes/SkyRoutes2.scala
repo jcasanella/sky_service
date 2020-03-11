@@ -25,7 +25,7 @@ class SkyRoutes2(actionRepository: ActorRef[ActionRepository.Command])(implicit 
         pathPrefix("item" / LongNumber ) { id =>
           val maybeJob: Future[Option[Order2]] = actionRepository.ask(ActionRepository.getItem(id, _))
           rejectEmptyResponse {
-            complete("maybeJob")
+            complete(maybeJob)
           }
         }
       },
