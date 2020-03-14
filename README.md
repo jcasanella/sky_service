@@ -39,10 +39,10 @@ Nexus:
 
 docker pull sonatype/nexus3
 docker volume create --name nexus-data
-docker container run -d -p 8081:8081 --name nexus -v //d/tmp/docker/nexus:/nexus-data sonatype/nexus3:latest
+docker container run -d -p 8081:8081 --name nexus -v nexus-data:/nexus-data sonatype/nexus3:latest
 
 Password located into this persisted folder. File called: admin.password
-user: admin
+user: admin/@N3xus144
 https://hub.docker.com/r/sonatype/nexus3/
 
 Docker:
@@ -55,3 +55,25 @@ user: docker/@D0cker144
 
 Create jenkins credentials to github using ssh
 https://medium.com/@khandelwal12nidhi/setup-ssh-between-jenkins-and-github-6ec7c7933244
+Install sbt-plugin, enable installation - global tools
+nexus-platform plugin
+Check nexus ip to be used from jenkins (docker container inspect nexus)
+Create credentials file in Path.userHome/.sbt/sonatype_credentials with the following content
+realm=Sonatype Nexus Repository Manager
+host=localhost
+user=admin
+password=@N3xus144
+
+add the following line to plugins.sbt
+credentials += Credentials(Path.userHome / ".sbt" / "sonatype_credentials")
+
+and the following lines to build.sbt
+```
+    publishTo := {
+      val nexus = "http://localhost:8081/"
+      if (isSnapshot.value)
+        Some("snapshots" at nexus + "repository/maven-snapshots/")
+      else
+        Some("releases"  at nexus + "repository/maven-releases/")
+    }
+```
