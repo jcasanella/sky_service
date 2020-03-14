@@ -44,3 +44,11 @@ docker container run -d -p 8081:8081 --name nexus -v //d/tmp/docker/nexus:/nexus
 Password located into this persisted folder. File called: admin.password
 user: admin
 https://hub.docker.com/r/sonatype/nexus3/
+
+Docker:
+
+docker pull jenkins/jenkins
+docker volume create jenkins_home
+docker run -p 8082:8080 -p 50000:50000 --name my_jenkins -v jenkins_home:/var/jenkins_home jenkins/jenkins
+
+user: docker/@D0cker144
