@@ -1,10 +1,6 @@
 pipeline {
-    agent {
-        node {
-            label 'Sky_Akka'
-        }
-    }
-
+    agent any
+    
     stages {
         stage('Checkout') {
             steps {
