@@ -1,12 +1,23 @@
 lazy val akkaHttpVersion = "10.1.11"
 lazy val akkaVersion    = "2.6.3"
 
+lazy val runInJenkins = settingKey[String]("Check if it runs in Jenkins")
+
 lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
       organization    := "com.casanella.service",
       version         := "0.1-SNAPSHOT",
-      scalaVersion    := "2.13.1"
+      scalaVersion    := "2.13.1",
+      runInJenkins := {
+        (sys.env.get("USERNAME")) match {
+          case Some(username) =>
+            println(s"Do my thing $username")
+          case _ =>
+            println("USERNAME and/or PASSWORD is missing")
+        }
+        ""
+      }
     )),
     name := "sky_service",
     resolvers ++= Seq(
