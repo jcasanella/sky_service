@@ -52,3 +52,6 @@ docker volume create jenkins_home
 docker run -p 8082:8080 -p 50000:50000 --name my_jenkins -v jenkins_home:/var/jenkins_home jenkins/jenkins
 
 user: docker/@D0cker144
+
+Create jenkins credentials to github using ssh
+https://medium.com/@khandelwal12nidhi/setup-ssh-between-jenkins-and-github-6ec7c7933244

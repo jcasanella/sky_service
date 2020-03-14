@@ -2,7 +2,6 @@ pipeline {
     agent {
         node {
             label 'Sky_Akka'
-            checkout scm
         }
     }
 
