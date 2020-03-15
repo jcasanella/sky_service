@@ -1,7 +1,7 @@
 lazy val akkaHttpVersion = "10.1.11"
 lazy val akkaVersion    = "2.6.3"
 
-lazy val runInJenkins = settingKey[String]("Check if it runs in Jenkins")
+lazy val nexusUrl = settingKey[String]("Check if it runs in Jenkins")
 
 lazy val root = (project in file(".")).
   settings(
@@ -9,19 +9,20 @@ lazy val root = (project in file(".")).
       organization    := "com.casanella.service",
       version         := "0.1-SNAPSHOT",
       scalaVersion    := "2.13.1",
-      runInJenkins := {
+      nexusUrl := {
         (sys.env.get("USERNAME")) match {
           case Some(username) =>
             println(s"Do my thing $username")
+            "localhost"
           case _ =>
-            println("USERNAME and/or PASSWORD is missing")
+            println("USERNAME is missing")
+            "172.17.0.3"
         }
-        ""
       }
     )),
     name := "sky_service",
     resolvers ++= Seq(
-      MavenRepository("Nexus Local Docker", "http://localhost:8081/repository/maven-releases/")
+      MavenRepository("Nexus Local Docker", s"http://${nexusUrl}:8081/repository/maven-releases/")
     ),
     libraryDependencies ++= Seq(
       "com.typesafe.akka" %% "akka-http"                % akkaHttpVersion,
@@ -35,7 +36,7 @@ lazy val root = (project in file(".")).
       "org.scalatest"     %% "scalatest"                % "3.0.8"         % Test
     ),
     publishTo := {
-      val nexus = "http://localhost:8081/"
+      val nexus = s"http://${nexusUrl}:8081/"
       if (isSnapshot.value)
         Some("snapshots" at nexus + "repository/maven-snapshots/")
       else
