@@ -22,7 +22,7 @@ lazy val root = (project in file(".")).
     )),
     name := "sky_service",
     resolvers ++= Seq(
-      MavenRepository("Nexus Local Docker", s"http://${nexusUrl}:8081/repository/maven-releases/")
+      MavenRepository("Nexus Local Docker", s"http://${nexusUrl.value}:8081/repository/maven-releases/")
     ),
     libraryDependencies ++= Seq(
       "com.typesafe.akka" %% "akka-http"                % akkaHttpVersion,
@@ -36,7 +36,7 @@ lazy val root = (project in file(".")).
       "org.scalatest"     %% "scalatest"                % "3.0.8"         % Test
     ),
     publishTo := {
-      val nexus = s"http://${nexusUrl}:8081/"
+      val nexus = s"http://${nexusUrl.value}:8081/"
       if (isSnapshot.value)
         Some("snapshots" at nexus + "repository/maven-snapshots/")
       else
