@@ -15,7 +15,7 @@ lazy val root = (project in file(".")).
             println(s"Do my thing $username")
             "localhost"
           case _ =>
-            println("USERNAME is missing")
+            println("USERNAME is missing " + Path.userHome.toString)
             "172.17.0.3"
         }
       }
