@@ -1,0 +1,27 @@
+version: "2.4"
+
+services:
+
+  nexus:
+    image: sonatype/nexus3:latest
+    container_name: nexus
+    ports:
+      - "8081:8081"
+    volumes:
+      - nexus-data:/nexus-data
+
+  jenkins:
+    image: jenkins/jenkins:latest
+    container_name: jenkins
+    ports:
+      - "8082:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    depends_on:
+      nexus:
+        condition: service_started
+
+volumes:
+  nexus-data:
+  jenkins_home:
