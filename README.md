@@ -34,27 +34,39 @@ $JSON = $message | convertto-json
 
 Invoke-WebRequest -uri "http://localhost:8080/item/10" 
 
+## Docker with Jenkins and Nexus
 
-Nexus:
+We have created a docker-compose with a custom Jenkins image. To run the docker compose execute the following command:
+```
+docker-compose build --no-cache
+docker-compose up
+```
 
-docker pull sonatype/nexus3
-docker volume create --name nexus-data
-docker container run -d -p 8081:8081 --name nexus -v nexus-data:/nexus-data sonatype/nexus3:latest
+Both images have their own volumes in order to persist the plugins, settings and artifacts.
 
-Password located into this persisted folder. File called: admin.password
-user: admin/@N3xus144
-https://hub.docker.com/r/sonatype/nexus3/
+### Jenkins image
 
-Docker:
+This image creates a custom jenkins image.  
+Some of these settings can be set up either in the docker-compose or Dockerfile.  
+By default the user and pass is: **admin** / **admin**  
+Runs in port 8082  
+It installs the default plugins and some extra plugins required by this project:
 
-docker pull jenkins/jenkins
-docker volume create jenkins_home
-docker container run -d -p 8082:8080 -p 50000:50000 --name my_jenkins -v jenkins_home:/var/jenkins_home jenkins/jenkins
+* sbt
+* nexus platform
+* docker
 
-user: docker/@D0cker144
+**Note**: Plugins can be checked in https://updates.jenkins.io/download/plugins/
 
+### Nexus image
+
+This will store the published artifacts after the build process. The port is defined in the docker-compose file.
+It's running in the port 8081
+
+### TODO
 Create jenkins credentials to github using ssh
 https://medium.com/@khandelwal12nidhi/setup-ssh-between-jenkins-and-github-6ec7c7933244
+
 Install sbt-plugin, enable installation - global tools
 nexus-platform plugin
 Check nexus ip to be used from jenkins (docker container inspect nexus)

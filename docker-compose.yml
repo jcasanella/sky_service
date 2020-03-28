@@ -11,8 +11,14 @@ services:
       - nexus-data:/nexus-data
 
   jenkins:
-    image: jenkins/jenkins:latest
-    container_name: jenkins
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: custom-jenkins-lts
+    container_name: jenkins-lts
+    environment:
+      - JENKINS_USER=admin
+      - JENKINS_PASS=admin
     ports:
       - "8082:8080"
       - "50000:50000"
