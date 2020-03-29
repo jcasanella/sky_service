@@ -19,7 +19,7 @@ table th:nth-of-type(6) {
 }
 </style>
 
-| <div style="width:790px">Description</div> | HTTP method | URL | Request Body | Status Code | Response Example |
+| Description | HTTP method | URL | Request Body&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Status Code | Response Example&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
 | ----------- | ----------- | --- | ------------ | ----------- | ---------------- |
 | Create customer | POST | v1/customers/create |``` { "personalId": "XXXXXX", name": "AAAA", "surname": "BBBBB", "dob": "YYYY-MM-DD", "address": "RRRRR", "zipcode": "xxxxx", "city": "CCCC" } ``` | 201 Created | ```{ "call": "customers/create", "method:": "post", "personalId": "XXXXXX", name": "AAAA", "surname": "BBBBB", "dob": "YYYY-MM-DD", "address": "RRRRR", "zipcode": "xxxxx", "city": "CCCC", "loadTS": "YYYY-MM-DDTHH:MM:SS.sss" }``` |
 | Get all customers | GET | v1/customers | N/A | 200 OK | [ { "personalId": "XXXXXX", name": "AAAA", "surname": "BBBBB", "dob": "YYYY-MM-DD", "address": "RRRRR", "zipcode": "xxxxx", "city": "CCCC", "loadTS": "YYYY-MM-DDTHH:MM:SS.sss" }, { "personalId": "XXXXXX", name": "AAAA", "surname": "BBBBB", "dob": "YYYY-MM-DD", "address": "RRRRR", "zipcode": "xxxxx", "city": "CCCC", "loadTS": "YYYY-MM-DDTHH:MM:SS.sss" } ] |
