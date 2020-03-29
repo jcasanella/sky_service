@@ -1,29 +1,13 @@
-<style>
-table th:first-of-type {
-    width: 10%;
-}
-table th:nth-of-type(2) {
-    width: 10%;
-}
-table th:nth-of-type(3) {
-    width: 10%;
-}
-table th:nth-of-type(4) {
-    width: 30%;
-}
-table th:nth-of-type(5) {
-    width: 10%;
-}
-table th:nth-of-type(6) {
-    width: 30%;
-}
-</style>
 
-| Description | HTTP method | URL | Request Body | Status Code | Response Example |
-| ----------- | ----------- | --- | ------------ | ----------- | ---------------- |
-| Create customer | POST | v1/customers/create |{<br/>&nbsp; "personalId": "XXXXXX",<br/>&nbsp; name": "AAAA",<br/>&nbsp; "surname": "BBBBB",<br/>&nbsp; "dob": "YYYY-MM-DD",<br/>&nbsp; "address": "RRRRR",<br/>&nbsp; "zipcode": "xxxxx",<br/>&nbsp; "city": "CCCC"<br/>&nbsp; }  | 201 Created | {<br/>&nbsp;"call": "customers/create",<br/>&nbsp; "method:": "post",<br/>&nbsp; "personalId": "XXXXXX",<br/>&nbsp; name": "AAAA",<br/>&nbsp; "surname": "BBBBB",<br/>&nbsp; "dob": "YYYY-MM-DD",<br/>&nbsp; "address": "RRRRR",<br/>&nbsp; "zipcode": "xxxxx",<br/>&nbsp; "city": "CCCC",<br/>&nbsp; "loadTS": "YYYY-MM-DDTHH:MM:SS.sss"<br/>&nbsp; }``` |
-| Get all customers | GET | v1/customers | N/A | 200 OK | ```[ { "personalId": "XXXXXX", name": "AAAA", "surname": "BBBBB", "dob": "YYYY-MM-DD", "address": "RRRRR", "zipcode": "xxxxx", "city": "CCCC", "loadTS": "YYYY-MM-DDTHH:MM:SS.sss" }, { "personalId": "XXXXXX", name": "AAAA", "surname": "BBBBB", "dob": "YYYY-MM-DD", "address": "RRRRR", "zipcode": "xxxxx", "city": "CCCC", "loadTS": "YYYY-MM-DDTHH:MM:SS.sss" } ]``` |
-| Get by customer id | GET | v1/customers/personalId/xxxx | N/A | 200 OK | ```{ "personalId": "XXXXXX", name": "AAAA", "surname": "BBBBB", "dob": "YYYY-MM-DD", "address": "RRRRR", "zipcode": "xxxxx", "city": "CCCC", "loadTS": "YYYY-MM-DDTHH:MM:SS.sss" }``` | 
+## API definitions
+
+In this liknk there's the [API definition](doc/api_definition.ods) for this project.
+Just to sum up:
+
+* v1/customers/create  (POST)
+* v1/customers (GET)
+* v1/customers/personalId/xxxx (GET)
+
 
 $message = @{ 
     items = @(
