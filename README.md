@@ -21,9 +21,9 @@ table th:nth-of-type(6) {
 
 | Description | HTTP method | URL | Request Body | Status Code | Response Example |
 | ----------- | ----------- | --- | ------------ | ----------- | ---------------- |
-| Create customer | POST | v1/customers/create |``` { "personalId": "XXXXXX", name": "AAAA", "surname": "BBBBB", "dob": "YYYY-MM-DD", "address": "RRRRR", "zipcode": "xxxxx", "city": "CCCC" } ``` | 201 Created | ```{ "call": "customers/create", "method:": "post", "personalId": "XXXXXX", name": "AAAA", "surname": "BBBBB", "dob": "YYYY-MM-DD", "address": "RRRRR", "zipcode": "xxxxx", "city": "CCCC", "loadTS": "YYYY-MM-DDTHH:MM:SS.sss" }``` |
+| Create customer | POST | v1/customers/create |{<br/>&nbsp; "personalId": "XXXXXX",<br/>&nbsp; name": "AAAA",<br/>&nbsp; "surname": "BBBBB",<br/>&nbsp; "dob": "YYYY-MM-DD",<br/>&nbsp; "address": "RRRRR",<br/>&nbsp; "zipcode": "xxxxx",<br/>&nbsp; "city": "CCCC"<br/>&nbsp; }  | 201 Created | ```{ "call": "customers/create", "method:": "post", "personalId": "XXXXXX", name": "AAAA", "surname": "BBBBB", "dob": "YYYY-MM-DD", "address": "RRRRR", "zipcode": "xxxxx", "city": "CCCC", "loadTS": "YYYY-MM-DDTHH:MM:SS.sss" }``` |
 | Get all customers | GET | v1/customers | N/A | 200 OK | ```[ { "personalId": "XXXXXX", name": "AAAA", "surname": "BBBBB", "dob": "YYYY-MM-DD", "address": "RRRRR", "zipcode": "xxxxx", "city": "CCCC", "loadTS": "YYYY-MM-DDTHH:MM:SS.sss" }, { "personalId": "XXXXXX", name": "AAAA", "surname": "BBBBB", "dob": "YYYY-MM-DD", "address": "RRRRR", "zipcode": "xxxxx", "city": "CCCC", "loadTS": "YYYY-MM-DDTHH:MM:SS.sss" } ]``` |
-| Get by customer id | GET | v1/customers/personalId/xxxx | N/A | 200 OK | { { "personalId": "XXXXXX", name": "AAAA", "surname": "BBBBB", "dob": "YYYY-MM-DD", "address": "RRRRR", "zipcode": "xxxxx", "city": "CCCC", "loadTS": "YYYY-MM-DDTHH:MM:SS.sss" } | 
+| Get by customer id | GET | v1/customers/personalId/xxxx | N/A | 200 OK | ```{ "personalId": "XXXXXX", name": "AAAA", "surname": "BBBBB", "dob": "YYYY-MM-DD", "address": "RRRRR", "zipcode": "xxxxx", "city": "CCCC", "loadTS": "YYYY-MM-DDTHH:MM:SS.sss" }``` | 
 
 $message = @{ 
     items = @(
