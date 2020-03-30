@@ -29,5 +29,5 @@ trait SkyResponsesJson extends SprayJsonSupport {
 
   implicit val itemFormat = jsonFormat2(Item)
   implicit val orderFormat = jsonFormat2(Order2)
-  implicit val customerFormat = jsonFormat7(Customer)
+//  implicit val customerFormat = jsonFormat7(Customer)
 }

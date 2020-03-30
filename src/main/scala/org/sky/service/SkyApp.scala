@@ -1,13 +1,11 @@
 package org.sky.service
 
-import akka.Done
 import akka.actor.ActorSystem
 import akka.event.Logging
 import akka.stream.ActorMaterializer
 import akka.http.scaladsl.Http
 
 import scala.io.StdIn
-import org.sky.service.db.Db
 import org.sky.service.routes.SkyRoutes2
 
 object SkyApp extends App {
