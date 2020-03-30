@@ -9,7 +9,7 @@ import scala.concurrent.{ExecutionContextExecutor, Future}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import akka.http.scaladsl.server.Route
-import org.sky.service.db.{ActionRepository, Db}
+import org.sky.service.db.Db
 import org.sky.service.model.JsonFormats._
 
 class SkyRoutes(val log: LoggingAdapter)(implicit ec: ExecutionContextExecutor) {

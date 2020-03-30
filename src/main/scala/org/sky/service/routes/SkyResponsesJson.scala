@@ -1,14 +1,13 @@
 package org.sky.service.routes
 
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
-import org.sky.service.model.{Item, Order2}
+import org.sky.service.model.{Customer, Item, Order2}
 import org.sky.service.routes.SkyResponses.{Failed, Status, Successful}
 import spray.json.{DefaultJsonProtocol, DeserializationException, JsString, JsValue, RootJsonFormat}
 
 trait SkyResponsesJson extends SprayJsonSupport {
 
   import DefaultJsonProtocol._
-  import org.sky.service.db.ActionRepository._
 
   implicit object StatusFormat extends RootJsonFormat[Status] {
 
@@ -30,4 +29,5 @@ trait SkyResponsesJson extends SprayJsonSupport {
 
   implicit val itemFormat = jsonFormat2(Item)
   implicit val orderFormat = jsonFormat2(Order2)
+  implicit val customerFormat = jsonFormat7(Customer)
 }
