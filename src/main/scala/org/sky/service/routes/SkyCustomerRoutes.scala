@@ -4,14 +4,13 @@ import akka.http.scaladsl.model.StatusCodes
 import org.sky.service.model.{Customer, JsonSupport}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
-import org.sky.service.service.PimpedOperations
+import org.sky.service.service.DbRegistry
 
 import scala.concurrent.{ExecutionContext, Future}
 
 class SkyCustomerRoutes(implicit ec: ExecutionContext) extends JsonSupport {
 
   import StatusCodes._
-  import org.sky.service.service.WrapperService.customerWrapped
 
   lazy val routes: Route =
     concat(
@@ -19,7 +18,7 @@ class SkyCustomerRoutes(implicit ec: ExecutionContext) extends JsonSupport {
         path("create") {
           entity(as[Customer]) { customer =>
             complete(
-              PimpedOperations.add(customer).map {
+              DbRegistry.customerService.add(customer).map {
                 case Some(cust) => Created -> cust
                 case None => BadRequest -> null
               })
@@ -28,7 +27,7 @@ class SkyCustomerRoutes(implicit ec: ExecutionContext) extends JsonSupport {
       },
       get {
         complete {
-          val seqCustomers: Future[Seq[Customer]] = PimpedOperations.get
+          val seqCustomers: Future[Seq[Customer]] = DbRegistry.customerService.get
           seqCustomers
         }
       }

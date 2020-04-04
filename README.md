@@ -8,6 +8,10 @@ Just to sum up:
 * v1/customers (GET)
 * v1/customers/personalId/xxxx (GET)
 
+TODO:
+* Send correct msg answer following SPEC
+* Call v1/customers/personalId/xxxx (GET)
+
 ## Docker with Jenkins and Nexus
 
 We have created a docker-compose with a custom Jenkins image. To run the docker compose execute the following command:
