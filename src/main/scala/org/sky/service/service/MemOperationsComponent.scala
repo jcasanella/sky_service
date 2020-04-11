@@ -19,6 +19,10 @@ trait MemDbOperationsServiceComponent[B, A <: Entity] {
     override def get()(implicit ec: ExecutionContext): Future[Seq[A]] = Future {
       elems.values.toSeq
     }
+
+    override def get(key: B)(implicit ec: ExecutionContext): Future[A] = Future {
+      elems(key)
+    }
   }
 }
 
@@ -38,6 +42,8 @@ trait CustomerServiceComponent {
     }
 
     def get()(implicit ec: ExecutionContext): Future[Seq[Customer]] = dBOperationsService.get()
+
+    def get(key: String)(implicit ec: ExecutionContext): Future[Customer] = dBOperationsService.get(key)
   }
 }
 

@@ -42,9 +42,9 @@ class SkyServiceSpec extends WordSpec with Matchers with ScalatestRouteTest with
 
     s"be able to add Customers (POST ${routeStr}/create" in {
 
-      val customer = Customer(personalId = "1", name = "George", surname = "Smith", dob = buildDate(1979, 11, 29),
+      val cust = Customer(personalId = "1", name = "George", surname = "Smith", dob = buildDate(1979, 11, 29),
         address = "124 London Road", zipcode = "MK12", city = "London")
-      val customerEntity = Marshal(customer).to[MessageEntity].futureValue
+      val customerEntity = Marshal(cust).to[MessageEntity].futureValue
 
       val request = Post(s"${routeStr}/create").withEntity(customerEntity)
 
@@ -54,6 +54,21 @@ class SkyServiceSpec extends WordSpec with Matchers with ScalatestRouteTest with
         contentType should === (ContentTypes.`application/json`)
 
         entityAs[String] should === (customer1)
+      }
+
+      val cust2 = Customer(personalId = "2", name = "Sophie", surname = "Larrou", dob = buildDate(1979, 10, 29),
+        address = "421 Manchester Road", zipcode = "WO12", city = "Wolverton")
+
+      val customerEntity2 = Marshal(cust2).to[MessageEntity].futureValue
+
+      val request2 = Post(s"${routeStr}/create").withEntity(customerEntity2)
+
+      request2 ~> skyRoutes.routes ~> check {
+        status should === (StatusCodes.Created)
+
+        contentType should === (ContentTypes.`application/json`)
+
+        entityAs[String] should === (customer2)
       }
     }
 
@@ -66,7 +81,20 @@ class SkyServiceSpec extends WordSpec with Matchers with ScalatestRouteTest with
 
         contentType should === (ContentTypes.`application/json`)
 
-        entityAs[String] should === (s"[${customers.mkString}]")
+        entityAs[String] should === (s"[${customers.mkString(",")}]")
+      }
+    }
+
+    s"return customer by id (GET ${routeStr}/${custId1}" in {
+
+      val request = Get(routeStr + "/" + custId1)
+
+      request ~> skyRoutes.routes ~> check {
+        status should === (StatusCodes.OK)
+
+        contentType should === (ContentTypes.`application/json`)
+
+        entityAs[String] should === (customer1)
       }
     }
   }

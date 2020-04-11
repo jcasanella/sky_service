@@ -4,13 +4,13 @@
 In this liknk there's the [API definition](doc/api_definition.ods) for this project.
 Just to sum up:
 
-* v1/customers/create  (POST)
-* v1/customers (GET)
-* v1/customers/personalId/xxxx (GET)
+* **POST** `v1/customers/create` Create a new customer
+* **GET** `v1/customers` Get all the customers
+* **GET** `v1/customers/:id` Return customer by Id
 
 TODO:
 * Send correct msg answer following SPEC
-* Call v1/customers/personalId/xxxx (GET)
+* Change Date for the Java8 new date
 
 ## Docker with Jenkins and Nexus
 

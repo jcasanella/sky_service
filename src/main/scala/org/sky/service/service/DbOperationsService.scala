@@ -9,6 +9,8 @@ trait DbOperationsService[B, A <: Entity] {
   def add(id: B, elem: A)(implicit ec: ExecutionContext): Future[A]
 
   def get()(implicit ec: ExecutionContext): Future[Seq[A]]
+
+  def get(key: B)(implicit ec: ExecutionContext): Future[A]
 }
 
 object DbRegistry extends CustomerServiceComponent with MemDbOperationsServiceComponent[String, Customer] {

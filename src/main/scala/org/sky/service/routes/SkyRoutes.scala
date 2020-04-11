@@ -12,7 +12,7 @@ class SkyRoutes(val log: LoggingAdapter)(implicit ec: ExecutionContext) {
 
   implicit val timeout: Timeout = 3.seconds
 
-  private val skyCustomerRoutes = new SkyCustomerRoutes()
+  private val skyCustomerRoutes = new SkyCustomerRoutes(log)
 
   lazy val routes: Route =
     pathPrefix("v1") {
